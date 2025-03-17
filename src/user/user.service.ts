@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import { CreateUserDto } from './create-user.dto';
+import { ConnectUserDto } from './connect-user.dto';
 
 @Injectable()
 export class UserService {
@@ -30,5 +31,13 @@ export class UserService {
     user.email = createUserDto.email;
     user.password = createUserDto.password;  // TODO hacher le mot de passe
     return this.userRepository.save(user);
+  }
+
+  async connectUser({email, password}: ConnectUserDto): Promise<User> {
+    const users = await this.userRepository.find({where: { email, password}});
+    if (users.length === 0) {
+      throw new ConflictException('Invalid credentials');
+    }
+    return users[0];
   }
 }
