@@ -29,7 +29,7 @@ export class UserService {
     const user = new User();
     user.username = createUserDto.username;
     user.email = createUserDto.email;
-    user.password = createUserDto.password;  // TODO hacher le mot de passe
+    user.password = createUserDto.password; 
     return this.userRepository.save(user);
   }
 
