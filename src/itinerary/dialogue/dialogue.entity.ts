@@ -11,9 +11,8 @@ export class Dialogue {
   step: Step;
 
   @Column()
-  character: string;
+  character: number;
 
   @Column()
   replica: string;
-
 }
