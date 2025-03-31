@@ -1,8 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ItineraryService } from './itinerary.service';
-import { Itinerary } from './itinerary.entity';
+import { CacheType, Itinerary } from './itinerary.entity';
 import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
+import { CreateItineraryDto } from './create-itinerary.dto';
 
 describe('ItineraryService', () => {
   let service: ItineraryService;
@@ -15,7 +16,7 @@ describe('ItineraryService', () => {
         {
           provide: getRepositoryToken(Itinerary),
           useValue: {
-            save: jest.fn(),
+            save: jest.fn().mockResolvedValue(new Itinerary()),
           },
         }
       ],
@@ -27,5 +28,56 @@ describe('ItineraryService', () => {
 
   it('should be defined', () => {
     expect(service).toBeDefined();
+  });
+
+  // createItinerary
+  it('should create an itinerary', async () => {
+    const createItineraryDto: CreateItineraryDto = {
+      title: 'Test Itinerary',
+      theme: 'Histore',
+      typeOfCache: CacheType.TRADITIONAL,
+      difficulty: 1,
+      duration: '1 hour',
+      accessibility: 'Accessible',
+      photoUrl: 'http://example.com/photo.jpg',
+    };
+
+    const result = await service.createItinerary(createItineraryDto);
+
+    expect(result).toBeDefined();
+    expect(itineraryRepository.save).toHaveBeenCalledWith(expect.objectContaining({
+      title: createItineraryDto.title,
+      theme: createItineraryDto.theme,
+      typeOfCache: createItineraryDto.typeOfCache,
+      difficulty: createItineraryDto.difficulty,
+      duration: createItineraryDto.duration,
+      accessibility: createItineraryDto.accessibility,
+      photoUrl: createItineraryDto.photoUrl,
+    }));
+  });
+
+  it('should handle undefined photoUrl', async () => {
+    const createItineraryDto: CreateItineraryDto = {
+      title: 'Test Itinerary',
+      theme: 'Histore',
+      typeOfCache: CacheType.TRADITIONAL,
+      difficulty: 1,
+      duration: '1 hour',
+      accessibility: 'Accessible',
+      photoUrl: undefined,
+    };
+
+    const result = await service.createItinerary(createItineraryDto);
+
+    expect(result).toBeDefined();
+    expect(itineraryRepository.save).toHaveBeenCalledWith(expect.objectContaining({
+      title: createItineraryDto.title,
+      theme: createItineraryDto.theme,
+      typeOfCache: createItineraryDto.typeOfCache,
+      difficulty: createItineraryDto.difficulty,
+      duration: createItineraryDto.duration,
+      accessibility: createItineraryDto.accessibility,
+      photoUrl: undefined,
+    }));
   });
 });
