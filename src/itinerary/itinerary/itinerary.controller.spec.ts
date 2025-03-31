@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ItineraryController } from './itinerary.controller';
 import { ItineraryService } from './itinerary.service';
 import { CreateItineraryDto } from './create-itinerary.dto';
-import { Itinerary } from './itinerary.entity';
+import { CacheType, Itinerary } from './itinerary.entity';
 
 describe('ItineraryController', () => {
   let controller: ItineraryController;
@@ -41,4 +41,25 @@ describe('ItineraryController', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
+
+    it('should create an itinerary', async () => {
+      const createItineraryDto: CreateItineraryDto = {
+        title: 'test title',
+        theme: '',
+        typeOfCache: CacheType.TRADITIONAL,
+        difficulty: 1,
+        duration: '1 hour',
+        accessibility: 'Easy',
+        photoUrl: 'http://example.com/photo.jpg',
+      };
+  
+      const createItinerarySpy = jest.spyOn(fakeItineraryService, 'createItinerary');
+      const result = await controller.createItinerary(createItineraryDto);
+  
+      expect(result).toBeDefined();
+      expect(result.title).toBe(createItineraryDto.title);
+  
+      // ce test garantit que le contrôleur interagit correctement avec le service en transmettant les données appropriées
+      expect(createItinerarySpy).toHaveBeenCalledWith(createItineraryDto);
+    });
 });
