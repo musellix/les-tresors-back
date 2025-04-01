@@ -15,9 +15,6 @@ export class Itinerary {
   @Column({ unique: true})
   title: string;
 
-  @Column({ nullable: true })
-  photoUrl?: string;
-
   @Column()
   theme: string;
 
@@ -32,6 +29,9 @@ export class Itinerary {
 
   @Column()
   accessibility: string;
+
+  @Column({ nullable: true })
+  photoUrl?: string;
 
   @OneToMany(() => Step, (step) => step.itinerary)
   steps: Step[]

@@ -40,6 +40,7 @@ describe('ItineraryService', () => {
       duration: '1 hour',
       accessibility: 'Accessible',
       photoUrl: 'http://example.com/photo.jpg',
+      steps: [],
     };
 
     const result = await service.createItinerary(createItineraryDto);
@@ -65,6 +66,7 @@ describe('ItineraryService', () => {
       duration: '1 hour',
       accessibility: 'Accessible',
       photoUrl: undefined,
+      steps: [],
     };
 
     const result = await service.createItinerary(createItineraryDto);

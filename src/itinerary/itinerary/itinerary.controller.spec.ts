@@ -52,6 +52,7 @@ describe('ItineraryController', () => {
       duration: '1 hour',
       accessibility: 'Easy',
       photoUrl: 'http://example.com/photo.jpg',
+      steps: [],
     };
 
     const createItinerarySpy = jest.spyOn(fakeItineraryService, 'createItinerary');

@@ -8,7 +8,7 @@ export class ItineraryController {
     constructor(private readonly itineraryService: ItineraryService) {}
 
     @Post("/create")
-        async createItinerary(@Body() body: CreateItineraryDto): Promise<Itinerary> {
+    async createItinerary(@Body() body: CreateItineraryDto): Promise<Itinerary> {
         return this.itineraryService.createItinerary(body);
     }
 }

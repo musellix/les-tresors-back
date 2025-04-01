@@ -1,5 +1,7 @@
-import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, IsUrl, Max, Min } from "class-validator";
+import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, IsUrl, Max, Min } from "class-validator";
 import { CacheType } from "./itinerary.entity";
+import { Type } from "class-transformer";
+import { CreateStepDto } from "../step/create-step.dto";
 
 export class CreateItineraryDto {
     @IsNotEmpty()
@@ -27,4 +29,7 @@ export class CreateItineraryDto {
     @IsUrl()
     photoUrl?: string;
 
+    @IsArray()
+    @Type(() => CreateStepDto)
+    steps: CreateStepDto[];
 }
