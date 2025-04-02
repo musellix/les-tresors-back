@@ -30,9 +30,11 @@ export class StepService {
         step.itinerary = itinerary;
         const savedStep = await this.stepRepository.save(step);
     
-        for (const dialogueDto of dialogues) {
-          await this.dialogueService.createDialogue({ ...dialogueDto, stepId: savedStep.id });
-        }
+        // save dialogues
+        const dialoguesPromise = dialogues.map((dialogue) => {
+          this.dialogueService.createDialogue({ ...dialogue, stepId: savedStep.id });
+        })
+        await Promise.all(dialoguesPromise);
     
         return savedStep;
     }

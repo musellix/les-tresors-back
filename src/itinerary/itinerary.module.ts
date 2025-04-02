@@ -8,10 +8,11 @@ import { DialogueService } from './dialogue/dialogue.service';
 import { Step } from './step/step.entity';
 import { Dialogue } from './dialogue/dialogue.entity';
 import { Itinerary } from './itinerary/itinerary.entity';
+import { StepService } from './step/step.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Itinerary, Dialogue, Step])],
   controllers: [ItineraryController, StepController, DialogueController],
-  providers: [ItineraryService, DialogueService]
+  providers: [ItineraryService, StepService, DialogueService]
 })
 export class ItineraryModule {}

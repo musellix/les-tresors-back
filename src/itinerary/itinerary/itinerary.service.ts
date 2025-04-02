@@ -3,6 +3,7 @@ import { CreateItineraryDto } from './create-itinerary.dto';
 import { Itinerary } from './itinerary.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { StepService } from '../step/step.service';
 
 @Injectable()
 export class ItineraryService {
@@ -10,9 +11,10 @@ export class ItineraryService {
     constructor(
         @InjectRepository(Itinerary)
         private itineraryRepository: Repository<Itinerary>,
+        private readonly stepService: StepService,
     ) {}
 
-    createItinerary(createItineraryDto: CreateItineraryDto): Promise<Itinerary> {
+    async createItinerary(createItineraryDto: CreateItineraryDto): Promise<Itinerary> {
         const itinerary = new Itinerary();
         itinerary.title = createItineraryDto.title;
         itinerary.theme = createItineraryDto.theme; 
@@ -21,6 +23,14 @@ export class ItineraryService {
         itinerary.duration = createItineraryDto.duration;
         itinerary.accessibility = createItineraryDto.accessibility;
         itinerary.photoUrl = createItineraryDto.photoUrl ?? undefined;
-        return this.itineraryRepository.save(itinerary)
+        const itinerarySaved: Itinerary = await this.itineraryRepository.save(itinerary);
+
+        // save steps
+        const stepPromises = createItineraryDto.steps.map((step) => {
+            this.stepService.createStep({...step, itineraryId: itinerarySaved.id});
+        });
+        await Promise.all(stepPromises);
+
+        return itinerarySaved
     }
 }
