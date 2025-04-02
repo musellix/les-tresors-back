@@ -19,6 +19,7 @@ describe('StepController', () => {
         return Promise.resolve({
           id: 1,
           itinerary: itineraryInstance,
+          orderId: 1,
           title: dto.title,
           dialogues: [],
         } as Step);
@@ -47,6 +48,7 @@ describe('StepController', () => {
       const createStepDto: CreateStepDto = {
         title: 'Test Step',
         itineraryId: 1,
+        orderId: 1,
         dialogues: [],
       };
 

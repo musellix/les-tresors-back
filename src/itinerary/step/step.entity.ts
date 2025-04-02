@@ -15,4 +15,7 @@ export class Step {
 
   @OneToMany(() => Dialogue, (dialogue) => dialogue.step)
   dialogues: Dialogue[]
+
+  @Column()
+  orderId: number;
 }

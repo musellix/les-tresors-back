@@ -59,6 +59,7 @@ describe('StepService', () => {
       const createStepDto: CreateStepDto = {
         title: 'Test Step',
         itineraryId: 1,
+        orderId: 1,
         dialogues: [
           { stepId: 1, character: 1, replica: 'Dialogue 1' },
           { stepId: 2, character: 2, replica: 'Dialogue 2' },
@@ -96,6 +97,7 @@ describe('StepService', () => {
       const createStepDto: CreateStepDto = {
         title: 'Test Step',
         itineraryId: 999,
+        orderId: 1,
         dialogues: [],
       };
 

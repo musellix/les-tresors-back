@@ -10,6 +10,9 @@ export class CreateStepDto {
   @IsNumber()
   itineraryId: number;
 
+  @IsNumber()
+  orderId: number;
+
   @IsArray()
   @Type(() => CreateDialogueDto)
   dialogues: CreateDialogueDto[];
