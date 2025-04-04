@@ -60,6 +60,7 @@ describe('StepController', () => {
         id: 1,
         title: 'Test Step',
         itinerary: { id: 1, title: 'Test Step' },
+        orderId: 1,
         dialogues: [],
       });
     });

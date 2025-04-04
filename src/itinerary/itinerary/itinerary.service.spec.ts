@@ -4,10 +4,15 @@ import { CacheType, Itinerary } from './itinerary.entity';
 import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { CreateItineraryDto } from './create-itinerary.dto';
+import { StepService } from '../step/step.service';
 
 describe('ItineraryService', () => {
   let service: ItineraryService;
   let itineraryRepository: Repository<Itinerary>;
+
+  const mockStepService = {
+    createStep: jest.fn(),
+  };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -18,7 +23,11 @@ describe('ItineraryService', () => {
           useValue: {
             save: jest.fn().mockResolvedValue(new Itinerary()),
           },
-        }
+        },
+        {
+          provide: StepService,
+          useValue: mockStepService,
+        },
       ],
     }).compile();
 
