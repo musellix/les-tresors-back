@@ -3,7 +3,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { StepService } from './step.service';
 import { Step } from './step.entity';
-import { CreateStepDto } from './create-step.dto';
+import { CreateStepDto } from './dto/create-step.dto';
 import { Itinerary } from '../itinerary/itinerary.entity';
 import { DialogueService } from '../dialogue/dialogue.service';
 

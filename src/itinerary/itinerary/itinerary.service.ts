@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateItineraryDto } from './create-itinerary.dto';
+import { CreateItineraryDto } from './dto/create-itinerary.dto';
 import { Itinerary } from './itinerary.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';

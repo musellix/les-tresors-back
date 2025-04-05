@@ -1,8 +1,8 @@
 import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, IsUrl, Max, Min } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
-import { CacheType } from "./itinerary.entity";
+import { CacheType } from "../itinerary.entity";
 import { Type } from "class-transformer";
-import { CreateStepDto } from "../step/create-step.dto";
+import { CreateStepDto } from "../../step/dto/create-step.dto";
 
 export class CreateItineraryDto {
     @ApiProperty({ description: "The title of the itinerary", example: "A bicyclette avec Louison" })

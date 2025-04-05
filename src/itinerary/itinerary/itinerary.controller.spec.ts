@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ItineraryController } from './itinerary.controller';
 import { ItineraryService } from './itinerary.service';
-import { CreateItineraryDto } from './create-itinerary.dto';
+import { CreateItineraryDto } from './dto/create-itinerary.dto';
 import { CacheType, Itinerary } from './itinerary.entity';
 
 describe('ItineraryController', () => {

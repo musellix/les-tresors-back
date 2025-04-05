@@ -2,8 +2,8 @@ import { ConflictException, Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
-import { CreateUserDto } from './create-user.dto';
-import { ConnectUserDto } from './connect-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
+import { ConnectUserDto } from './dto/connect-user.dto';
 
 @Injectable()
 export class UserService {

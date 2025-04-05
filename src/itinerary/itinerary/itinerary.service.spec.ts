@@ -3,7 +3,7 @@ import { ItineraryService } from './itinerary.service';
 import { CacheType, Itinerary } from './itinerary.entity';
 import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { CreateItineraryDto } from './create-itinerary.dto';
+import { CreateItineraryDto } from './dto/create-itinerary.dto';
 import { StepService } from '../step/step.service';
 
 describe('ItineraryService', () => {

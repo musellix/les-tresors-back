@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Dialogue } from './dialogue.entity';
-import { CreateDialogueDto } from './create-dialogue.dto';
+import { CreateDialogueDto } from './dto/create-dialogue.dto';
 import { Step } from '../step/step.entity';
 
 @Injectable()

@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { StepController } from './step.controller';
 import { StepService } from './step.service';
-import { CreateStepDto } from './create-step.dto';
+import { CreateStepDto } from './dto/create-step.dto';
 import { Step } from './step.entity';
 import { Itinerary } from '../itinerary/itinerary.entity';
 

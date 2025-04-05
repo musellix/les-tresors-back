@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { DialogueController } from './dialogue.controller';
 import { DialogueService } from './dialogue.service';
-import { CreateDialogueDto } from './create-dialogue.dto';
+import { CreateDialogueDto } from './dto/create-dialogue.dto';
 import { Dialogue } from './dialogue.entity';
 import { Step } from '../step/step.entity';
 

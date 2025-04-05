@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { Itinerary } from './itinerary.entity';
-import { CreateItineraryDto } from './create-itinerary.dto';
+import { CreateItineraryDto } from './dto/create-itinerary.dto';
 import { ItineraryService } from './itinerary.service';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
