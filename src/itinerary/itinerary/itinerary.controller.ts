@@ -1,8 +1,9 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, Put } from '@nestjs/common';
 import { Itinerary } from './itinerary.entity';
 import { CreateItineraryDto } from './dto/create-itinerary.dto';
 import { ItineraryService } from './itinerary.service';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { UpdateItineraryDto } from './dto/update-itinerary.dto';
 
 @ApiTags('Itinerary')
 @Controller('itinerary')
@@ -16,5 +17,14 @@ export class ItineraryController {
     @ApiResponse({ status: 400, description: 'Validation error' })
     async createItinerary(@Body() body: CreateItineraryDto): Promise<Itinerary> {
         return this.itineraryService.createItinerary(body);
+    }
+
+    @Put('/update')
+    @ApiOperation({ summary: 'Update an itinerary' })
+    @ApiBody({ type: UpdateItineraryDto })
+    @ApiResponse({ status: 200, description: 'Itinerary updated successfully', type: Itinerary })
+    @ApiResponse({ status: 400, description: 'Validation error' })
+    async updateItinerary(@Body() body: UpdateItineraryDto): Promise<Itinerary> {
+      return this.itineraryService.updateItinerary(body);
     }
 }
