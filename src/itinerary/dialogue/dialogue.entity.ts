@@ -19,4 +19,8 @@ export class Dialogue {
   @Column()
   @ApiProperty({ description: 'The text of the dialogue', example: 'Hello, welcome to the adventure!' })
   replica: string;
+
+  @Column()
+  @ApiProperty({ description: 'The order of the dialogue in the step', example: 1 })
+  orderId: number;
 }

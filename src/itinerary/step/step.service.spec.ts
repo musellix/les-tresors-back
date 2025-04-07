@@ -61,8 +61,8 @@ describe('StepService', () => {
         itineraryId: 1,
         orderId: 1,
         dialogues: [
-          { stepId: 1, character: 1, replica: 'Dialogue 1' },
-          { stepId: 2, character: 2, replica: 'Dialogue 2' },
+          { stepId: 1, orderId: 1, character: 1, replica: 'Dialogue 1' },
+          { stepId: 2, orderId: 2, character: 2, replica: 'Dialogue 2' },
         ],
       };
 

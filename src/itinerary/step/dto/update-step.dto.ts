@@ -16,10 +16,12 @@ export class UpdateStepDto {
 
   @ApiProperty({ description: 'The ID of the associated itinerary', example: 1 })
   @IsNumber()
+  @IsNotEmpty()
   itineraryId: number;
 
   @ApiProperty({ description: 'The order of the step in the itinerary', example: 1 })
   @IsNumber()
+  @IsNotEmpty()
   orderId: number;
 
   @ApiProperty({ description: 'The list of dialogues associated with the step', type: [UpdateDialogueDto] })

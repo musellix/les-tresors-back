@@ -7,6 +7,11 @@ export class CreateDialogueDto {
   @IsNotEmpty()
   stepId: number;
 
+  @ApiProperty({ description: 'The order of the dialog in the step', example: 1 })
+  @IsNumber()
+  @IsNotEmpty()
+  orderId: number;
+
   @ApiProperty({ description: 'The ID of the character speaking', example: 2 })
   @IsNumber()
   @IsNotEmpty()

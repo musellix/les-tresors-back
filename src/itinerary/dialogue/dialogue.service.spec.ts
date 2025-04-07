@@ -47,6 +47,7 @@ describe('DialogueService', () => {
 
     const result = await service.createDialogue({
       stepId: 1,
+      orderId: 1,
       character: 0,
       replica: 'Hello tests',
     });

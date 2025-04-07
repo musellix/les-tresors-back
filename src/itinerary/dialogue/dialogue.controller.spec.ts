@@ -45,6 +45,7 @@ describe('DialogueController', () => {
   it('should create a dialogue', async () => {
     const createDialogueDto: CreateDialogueDto = {
       stepId: 1,
+      orderId: 1,
       character: 1,
       replica: 'Hello, this is a test dialogue.',
     };
