@@ -1,4 +1,4 @@
-import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, IsUrl, Max, Min } from "class-validator";
+import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, IsUrl, Max, Min, ValidateNested } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
 import { CacheType } from "../itinerary.entity";
 import { Type } from "class-transformer";
@@ -44,6 +44,7 @@ export class UpdateItineraryDto {
 
     @ApiProperty({ type: [UpdateStepDto], description: "List of steps for the itinerary" })
     @IsArray()
+    @ValidateNested({ each: true })
     @Type(() => UpdateStepDto)
     steps: UpdateStepDto[];
 }

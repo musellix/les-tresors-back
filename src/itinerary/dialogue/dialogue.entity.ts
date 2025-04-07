@@ -13,8 +13,8 @@ export class Dialogue {
   step: Step;
 
   @Column()
-  @ApiProperty({ description: 'The character ID associated with the dialogue', example: 101 })
-  character: number;
+  @ApiProperty({ description: 'The character associated with the dialogue', example: 'Barbobec' })
+  character: string;
 
   @Column()
   @ApiProperty({ description: 'The text of the dialogue', example: 'Hello, welcome to the adventure!' })

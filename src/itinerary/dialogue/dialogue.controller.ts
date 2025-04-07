@@ -10,12 +10,4 @@ export class DialogueController {
 
   constructor(private readonly dialogueService: DialogueService) {}
 
-  @Post('/create')
-  @ApiOperation({ summary: 'Create a new dialogue' })
-  @ApiBody({ type: CreateDialogueDto }) 
-  @ApiResponse({ status: 201, description: 'Dialogue created successfully', type: Dialogue}) 
-  @ApiResponse({ status: 400, description: 'Validation error' })
-  async createDialogue(@Body() body: CreateDialogueDto): Promise<Dialogue> {
-    return this.dialogueService.createDialogue(body);
-  }
 }

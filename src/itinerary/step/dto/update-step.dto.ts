@@ -1,7 +1,8 @@
 import { Type } from 'class-transformer';
-import { IsString, IsNotEmpty, IsNumber, IsArray, IsInt } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsArray, IsInt, ValidateNested } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { UpdateDialogueDto } from 'src/itinerary/dialogue/dto/update-dialogue.dto';
+import { IsStringOrEmpty } from '../validators/is-string-or-empty.validator';
 
 export class UpdateStepDto {
   @ApiProperty({ description: "The ID of the itinerary to update", example: 1 })
@@ -10,8 +11,7 @@ export class UpdateStepDto {
   id: number;
 
   @ApiProperty({ description: 'The title of the step', example: 'Step 1' })
-  @IsString()
-  @IsNotEmpty()
+  @IsStringOrEmpty()
   title: string;
 
   @ApiProperty({ description: 'The ID of the associated itinerary', example: 1 })
@@ -26,6 +26,7 @@ export class UpdateStepDto {
 
   @ApiProperty({ description: 'The list of dialogues associated with the step', type: [UpdateDialogueDto] })
   @IsArray()
+  @ValidateNested({ each: true })
   @Type(() => UpdateDialogueDto)
   dialogues: UpdateDialogueDto[];
 }

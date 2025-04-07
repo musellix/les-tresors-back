@@ -34,7 +34,7 @@ export class ItineraryService {
 
         // save steps
         const stepPromises = createItineraryDto.steps.map((step) => {
-            this.stepService.createStep({...step, itineraryId: itinerarySaved.id});
+            this.stepService.createStep(step, itinerarySaved.id);
         });
         await Promise.all(stepPromises);
 

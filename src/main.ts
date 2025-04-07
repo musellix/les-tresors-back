@@ -16,6 +16,13 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
+  // Active le pipe de validation global
+  app.useGlobalPipes(new ValidationPipe({
+    whitelist: true, // Supprime les propriétés non définies dans le DTO
+    forbidNonWhitelisted: true, // Retourne une erreur si des propriétés non attendues sont présentes
+    transform: true, // Transforme les données en instances des DTO
+  }));
+
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

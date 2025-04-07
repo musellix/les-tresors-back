@@ -21,8 +21,8 @@ export class DialogueService {
    * @returns The created dialogue.
    * @throws Error if the step associated with the dialogue is not found.
    */
-  async createDialogue(createDialogueDto: CreateDialogueDto): Promise<Dialogue> {
-    const { stepId, character, replica } = createDialogueDto;
+  async createDialogue(createDialogueDto: CreateDialogueDto, stepId: number): Promise<Dialogue> {
+    const { orderId, character, replica } = createDialogueDto;
 
     const step = await this.stepRepository.findOne({ where: { id: stepId } });
     if (!step) {
@@ -31,6 +31,7 @@ export class DialogueService {
 
     const dialogue = new Dialogue();
     dialogue.step = step;
+    dialogue.orderId = orderId
     dialogue.character = character;
     dialogue.replica = replica;
     return this.dialogueRepository.save(dialogue);
