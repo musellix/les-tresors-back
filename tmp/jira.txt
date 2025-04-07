@@ -1,0 +1,18 @@
+dans user :: signin
+ne pas retourner le mot de passe
+
+
+itineraires, step, dialogue - faire suppresison
+une suppression modifie une valeur dans un champ pour ne pas supprimer rellement
+
+
+afficher tous les itineraires
+
+
+afficher un itineraire
+
+
+dialogue - remplacer le personnage: string par un Objet
+a voir comment organiser
+mettre le personnage et son theme associé
+de meme itinerary a un theme. L'associé à cet objet
