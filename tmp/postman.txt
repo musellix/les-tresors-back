@@ -1,0 +1,31 @@
+{
+    "title": "A bicyclette avec Louison",
+    "theme": "Sport",
+    "typeOfCache": "Multicache",
+    "difficulty": 2,
+    "duration": "1 h",
+    "accessibility": "tous",
+    "steps": [
+        {
+            "title": "",
+            "dialogues": [
+                {
+                    "character": "Kronomec",
+                    "replica": "Salut les amis ! Prêts pour une virée à Saint-Méen-le-Grand sur les traces du grand Louison Bobet ? Eh oui, cette commune d’Ille-et-Vilaine a vu naître un sacré champion, triple vainqueur du Tour de France entre 1953 et 1955. Rien que ça ! Allez, suivez-moi on va attaquer la grande boucle et découvrir ensemble tous les lieux de sa jeunesse"
+                },
+                {
+                    "character": "Lutin vert",
+                    "replica": "Allez, allez, roulez mes amis. Aujourd’hui Kronomec ne sent plus ses pédales....Tout le monde va devoir suivre le rythme même toi Barbobec."
+                },
+                {
+                    "character": "Barbobec",
+                    "replica": "Ne t’inquiète pas pour moi mon jeune ami. C’est dans les vieux pots que l’on fait les meilleures soupes !"
+                },
+                {
+                    "character": "Kronomec",
+                    "replica": "Alors ça marche ! Entrons dans le vif du sujet. Direction la première étape. Ne cherchez pas à jouer la montre mais plutôt à découvrir un musée pas tout à fait comme les autres, entièrement consacré à ce grand champion, “l’Espace “Tous à vélo avec Louison Bobet”."
+                }
+            ]
+        }
+    ]
+}
