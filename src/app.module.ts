@@ -5,9 +5,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { ItineraryModule } from './itinerary/itinerary.module';
+import { ThemeModule } from './theme/theme.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(typeOrmConfig), UserModule, ItineraryModule],
+  imports: [TypeOrmModule.forRoot(typeOrmConfig), UserModule, ItineraryModule, ThemeModule],
   controllers: [AppController],
   providers: [AppService],
 })
