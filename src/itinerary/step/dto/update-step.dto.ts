@@ -2,7 +2,7 @@ import { Type } from 'class-transformer';
 import { IsNotEmpty, IsNumber, IsArray, IsInt, ValidateNested } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { UpdateDialogueDto } from 'src/itinerary/dialogue/dto/update-dialogue.dto';
-import { IsStringOrEmpty } from '../validators/is-string-or-empty.validator';
+import { IsStringOrEmpty } from 'src/common/validators/is-string-or-empty.validator';
 
 export class UpdateStepDto {
   @ApiProperty({ description: "The ID of the itinerary to update", example: 1 })
