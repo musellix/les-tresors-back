@@ -6,6 +6,13 @@ itineraires, step, dialogue - faire suppresison
 une suppression modifie une valeur dans un champ pour ne pas supprimer rellement
 
 
+itineraire - modifier
+quand on modifie un itineraire, on peut ajouter un step, ou un dialogue
+ces nouveaux steps et dialogues n'ont pas d'id
+donc ils ne passeront pas UpdateStepDto et UpdateDialogueDto
+ajouter stepId en optionnel
+
+
 afficher tous les itineraires
 
 
@@ -16,3 +23,6 @@ dialogue - remplacer le personnage: string par un Objet
 a voir comment organiser
 mettre le personnage et son theme associé
 de meme itinerary a un theme. L'associé à cet objet
+
+
+
