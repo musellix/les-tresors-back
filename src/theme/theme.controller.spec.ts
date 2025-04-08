@@ -34,14 +34,14 @@ describe('ThemeController', () => {
       const createThemeDto: CreateThemeDto = {
         korrigan: 'Queen Aman',
         category: '1 h',
-        pictureUrl: 'https://example.com/photo.jpg',
+        pictureName: 'queen-aman',
       };
   
       const createdTheme: Theme = {
         id: 1,
         korrigan: 'Queen Aman',
         category: '1 h',
-        pictureUrl: 'https://example.com/photo.jpg',
+        pictureName: 'queen-aman',
       };
   
       jest.spyOn(themeService, 'createTheme').mockResolvedValue(createdTheme);
