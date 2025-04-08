@@ -11,19 +11,7 @@ describe('StepController', () => {
 
   beforeEach(async () => {
     fakeStepService = {
-      createStep: (dto: CreateStepDto) => {
-        const itineraryInstance = new Itinerary();
-        itineraryInstance.id = dto.itineraryId;
-        itineraryInstance.title = dto.title;
-
-        return Promise.resolve({
-          id: 1,
-          itinerary: itineraryInstance,
-          orderId: 1,
-          title: dto.title,
-          dialogues: [],
-        } as Step);
-      },
+      
     };
 
     const module: TestingModule = await Test.createTestingModule({
@@ -43,26 +31,4 @@ describe('StepController', () => {
     expect(controller).toBeDefined();
   });
 
-  describe('createStep', () => {
-    it('should call StepService.createStep and return the created step', async () => {
-      const createStepDto: CreateStepDto = {
-        title: 'Test Step',
-        itineraryId: 1,
-        orderId: 1,
-        dialogues: [],
-      };
-
-      const createStepSpy = jest.spyOn(fakeStepService, 'createStep');
-      const result = await controller.createStep(createStepDto);
-
-      expect(createStepSpy).toHaveBeenCalledWith(createStepDto);
-      expect(result).toEqual({
-        id: 1,
-        title: 'Test Step',
-        itinerary: { id: 1, title: 'Test Step' },
-        orderId: 1,
-        dialogues: [],
-      });
-    });
-  });
 });

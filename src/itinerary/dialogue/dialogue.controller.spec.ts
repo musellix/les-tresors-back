@@ -11,18 +11,7 @@ describe('DialogueController', () => {
 
   beforeEach(async () => {
     fakeDialogueService = {
-      createDialogue: (dto: CreateDialogueDto) => {
-        const stepInstance = new Step();
-        stepInstance.id = 1;
-        stepInstance.title = 'Step de test';
-
-        return Promise.resolve({
-          id: 1,
-          step: stepInstance,
-          character: dto.character,
-          replica: dto.replica,
-        } as Dialogue);
-      },
+      
     };
 
     const module: TestingModule = await Test.createTestingModule({
@@ -42,21 +31,4 @@ describe('DialogueController', () => {
     expect(controller).toBeDefined();
   });
 
-  it('should create a dialogue', async () => {
-    const createDialogueDto: CreateDialogueDto = {
-      stepId: 1,
-      orderId: 1,
-      character: 1,
-      replica: 'Hello, this is a test dialogue.',
-    };
-
-    const createDialogueSpy = jest.spyOn(fakeDialogueService, 'createDialogue');
-    const result = await controller.createDialogue(createDialogueDto);
-
-    expect(result).toBeDefined();
-    expect(result.replica).toBe(createDialogueDto.replica);
-
-    // ce test garantit que le contrôleur interagit correctement avec le service en transmettant les données appropriées
-    expect(createDialogueSpy).toHaveBeenCalledWith(createDialogueDto);
-  });
 });

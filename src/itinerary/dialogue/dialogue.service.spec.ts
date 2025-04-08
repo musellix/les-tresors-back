@@ -46,11 +46,10 @@ describe('DialogueService', () => {
     jest.spyOn(dialogueRepository, 'save').mockResolvedValue(new Dialogue());
 
     const result = await service.createDialogue({
-      stepId: 1,
       orderId: 1,
-      character: 0,
+      character: "Queen Aman",
       replica: 'Hello tests',
-    });
+    }, 1);
 
     // Assertions
     expect(result).toBeDefined();

@@ -21,6 +21,7 @@ export class StepService {
     /**
      * Creates a new step and its associated dialogues.
      * @param createStepDto - The data transfer object containing step details and dialogues.
+     * @param itineraryId - The id of the itinerary associated.
      * @returns The created step.
      * @throws Error if the associated itinerary is not found.
      */

@@ -58,11 +58,10 @@ describe('StepService', () => {
     it('should create a step with an associated itinerary', async () => {
       const createStepDto: CreateStepDto = {
         title: 'Test Step',
-        itineraryId: 1,
         orderId: 1,
         dialogues: [
-          { stepId: 1, orderId: 1, character: 1, replica: 'Dialogue 1' },
-          { stepId: 2, orderId: 2, character: 2, replica: 'Dialogue 2' },
+          { orderId: 1, character: "Queen Aman", replica: 'Dialogue 1' },
+          { orderId: 2, character: "Queen Aman", replica: 'Dialogue 2' },
         ],
       };
 
@@ -75,14 +74,14 @@ describe('StepService', () => {
       step.itinerary = itinerary;
       stepRepository.save = jest.fn().mockResolvedValue(step);
 
-      const result = await service.createStep(createStepDto);
+      const result = await service.createStep(createStepDto, itinerary.id);
       step.id = result.id;
 
       expect(result).toBeDefined();
       expect(result.title).toBe(createStepDto.title);
       expect(result.itinerary).toBe(itinerary);
 
-      expect(itineraryRepository.findOne).toHaveBeenCalledWith({ where: { id: createStepDto.itineraryId } });
+      expect(itineraryRepository.findOne).toHaveBeenCalledWith({ where: { id: itinerary.id } });
       expect(stepRepository.save).toHaveBeenCalledWith(expect.objectContaining({
         title: createStepDto.title,
         itinerary,
@@ -96,13 +95,12 @@ describe('StepService', () => {
 
       const createStepDto: CreateStepDto = {
         title: 'Test Step',
-        itineraryId: 999,
         orderId: 1,
         dialogues: [],
       };
 
-      await expect(service.createStep(createStepDto)).rejects.toThrow('Itinerary not found');
-      expect(itineraryRepository.findOne).toHaveBeenCalledWith({ where: { id: createStepDto.itineraryId } });
+      await expect(service.createStep(createStepDto, 999)).rejects.toThrow('Itinerary not found');
+      expect(itineraryRepository.findOne).toHaveBeenCalledWith({ where: { id: 999 } });
       expect(stepRepository.save).not.toHaveBeenCalled();
       expect(dialogueService.createDialogue).not.toHaveBeenCalled();
     });
