@@ -5,10 +5,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { ItineraryModule } from './itinerary/itinerary.module';
-import { ThemeModule } from './theme/theme.module';
+import { KorriganModule } from './korrigan/korrigan.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(typeOrmConfig), UserModule, ItineraryModule, ThemeModule],
+  imports: [TypeOrmModule.forRoot(typeOrmConfig), UserModule, ItineraryModule, KorriganModule],
   controllers: [AppController],
   providers: [AppService],
 })
