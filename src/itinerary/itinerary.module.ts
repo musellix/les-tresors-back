@@ -9,9 +9,10 @@ import { Step } from './step/step.entity';
 import { Dialogue } from './dialogue/dialogue.entity';
 import { Itinerary } from './itinerary/itinerary.entity';
 import { StepService } from './step/step.service';
+import { Korrigan } from 'src/korrigan/korrigan.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Itinerary, Dialogue, Step])],
+  imports: [TypeOrmModule.forFeature([Itinerary, Dialogue, Step, Korrigan])],
   controllers: [ItineraryController, StepController, DialogueController],
   providers: [ItineraryService, StepService, DialogueService]
 })

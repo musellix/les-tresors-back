@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Step } from '../step/step.entity';
 import { ApiProperty } from '@nestjs/swagger';
+import { Korrigan } from 'src/korrigan/korrigan.entity';
 
 @Entity()
 export class Dialogue {
@@ -12,9 +13,9 @@ export class Dialogue {
   @ApiProperty({ description: 'The step associated with this dialogue', type: () => Step })
   step: Step;
 
-  @Column()
-  @ApiProperty({ description: 'The character associated with the dialogue', example: 'Barbobec' })
-  character: string;
+  @ManyToOne(() => Korrigan)
+  @ApiProperty({ description: 'The korrigan associated with this dialogue', type: () => Korrigan })
+  korrigan: Korrigan;
 
   @Column()
   @ApiProperty({ description: 'The text of the dialogue', example: 'Hello, welcome to the adventure!' })

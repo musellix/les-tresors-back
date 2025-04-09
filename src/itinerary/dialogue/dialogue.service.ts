@@ -5,6 +5,7 @@ import { Dialogue } from './dialogue.entity';
 import { CreateDialogueDto } from './dto/create-dialogue.dto';
 import { Step } from '../step/step.entity';
 import { UpdateDialogueDto } from './dto/update-dialogue.dto';
+import { Korrigan } from 'src/korrigan/korrigan.entity';
 
 @Injectable()
 export class DialogueService {
@@ -13,6 +14,8 @@ export class DialogueService {
     private readonly dialogueRepository: Repository<Dialogue>,
     @InjectRepository(Step)
     private readonly stepRepository: Repository<Step>,
+    @InjectRepository(Korrigan)
+    private readonly korriganRepository: Repository<Korrigan>,
   ) {}
 
   /**
@@ -22,17 +25,22 @@ export class DialogueService {
    * @throws Error if the step associated with the dialogue is not found.
    */
   async createDialogue(createDialogueDto: CreateDialogueDto, stepId: number): Promise<Dialogue> {
-    const { orderId, character, replica } = createDialogueDto;
+    const { orderId, korriganId, replica } = createDialogueDto;
 
     const step = await this.stepRepository.findOne({ where: { id: stepId } });
     if (!step) {
       throw new Error('Step not found');
     }
 
+    const korrigan = await this.korriganRepository.findOne({ where: { id: korriganId } });
+    if (!korrigan) {
+      throw new Error('Korrigan not found');
+    }
+
     const dialogue = new Dialogue();
     dialogue.step = step;
     dialogue.orderId = orderId
-    dialogue.character = character;
+    dialogue.korrigan = korrigan;
     dialogue.replica = replica;
     return this.dialogueRepository.save(dialogue);
   }

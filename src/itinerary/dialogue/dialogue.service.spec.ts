@@ -4,11 +4,13 @@ import { Dialogue } from './dialogue.entity';
 import { Step } from '../step/step.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { Korrigan } from 'src/korrigan/korrigan.entity';
 
 describe('DialogueService', () => {
   let service: DialogueService;
   let dialogueRepository: Repository<Dialogue>;
   let stepRepository: Repository<Step>;
+  let korriganRepository: Repository<Korrigan>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -26,12 +28,19 @@ describe('DialogueService', () => {
             findOne: jest.fn(),
           },
         },
+        {
+          provide: getRepositoryToken(Korrigan),
+          useValue: {
+            findOne: jest.fn(),
+          },
+        },
       ],
     }).compile();
 
     service = module.get<DialogueService>(DialogueService);
     dialogueRepository = module.get<Repository<Dialogue>>(getRepositoryToken(Dialogue));
     stepRepository = module.get<Repository<Step>>(getRepositoryToken(Step));
+    korriganRepository = module.get<Repository<Korrigan>>(getRepositoryToken(Korrigan));
   });
 
   it('should be defined', () => {
@@ -45,9 +54,12 @@ describe('DialogueService', () => {
     // Mock dialogue.save method
     jest.spyOn(dialogueRepository, 'save').mockResolvedValue(new Dialogue());
 
+    const mockKorrigan = new Korrigan();
+    jest.spyOn(korriganRepository, 'findOne').mockResolvedValue(mockKorrigan);
+
     const result = await service.createDialogue({
       orderId: 1,
-      character: "Queen Aman",
+      korriganId: 0,
       replica: 'Hello tests',
     }, 1);
 

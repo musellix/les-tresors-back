@@ -17,10 +17,10 @@ export class UpdateDialogueDto {
   @IsNotEmpty()
   orderId: number;
 
-  @ApiProperty({ description: 'The ID of the character speaking', example: 'Barbobec' })
-  @IsString()
+  @ApiProperty({ description: 'The ID of the korrigan speaking', example: 1 })
+  @IsNumber()
   @IsNotEmpty()
-  character: string;
+  korriganId: number;
 
   @ApiProperty({ description: 'The text of the dialogue', example: 'Salut les amis !' })
   @IsString()

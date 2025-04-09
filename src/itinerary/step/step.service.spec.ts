@@ -60,8 +60,8 @@ describe('StepService', () => {
         title: 'Test Step',
         orderId: 1,
         dialogues: [
-          { orderId: 1, character: "Queen Aman", replica: 'Dialogue 1' },
-          { orderId: 2, character: "Queen Aman", replica: 'Dialogue 2' },
+          { orderId: 1, korriganId: 0, replica: 'Dialogue 1' },
+          { orderId: 2, korriganId: 1, replica: 'Dialogue 2' },
         ],
       };
 
