@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne } from 'typeorm';
 import { Step } from '../step/step.entity';
 import { ApiProperty } from '@nestjs/swagger';
+import { Korrigan } from 'src/korrigan/korrigan.entity';
 
 export enum CacheType {
   MULTICACHE = 'Multicache',
@@ -17,9 +18,9 @@ export class Itinerary {
   @ApiProperty({ description: 'The title of the itinerary', example: 'A bicyclette avec Louison' })
   title: string;
 
-  @Column()
-  @ApiProperty({ description: 'The theme of the itinerary', example: 'Sport' })
-  theme: string;
+  @ManyToOne(() => Korrigan)
+  @ApiProperty({ description: 'The theme of the itinerary', type: () => Korrigan })
+  theme: Korrigan;
 
   @Column({ type: 'text' })
   @ApiProperty({ description: 'Type of cache used', enum: CacheType, example: 'Multicache' })

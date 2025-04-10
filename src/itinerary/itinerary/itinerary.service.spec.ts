@@ -5,13 +5,24 @@ import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { CreateItineraryDto } from './dto/create-itinerary.dto';
 import { StepService } from '../step/step.service';
+import { Korrigan } from 'src/korrigan/korrigan.entity';
+import { KorriganService } from 'src/korrigan/korrigan.service';
 
 describe('ItineraryService', () => {
   let service: ItineraryService;
   let itineraryRepository: Repository<Itinerary>;
+  let korriganRepository: Repository<Korrigan>;
 
   const mockStepService = {
     createStep: jest.fn(),
+  };
+
+  const mockKorriganService = {
+    findOne: jest.fn().mockResolvedValue({
+      id: 1,
+      name: 'Test name',
+      theme: 'Test theme',
+    }),
   };
 
   beforeEach(async () => {
@@ -25,6 +36,10 @@ describe('ItineraryService', () => {
           },
         },
         {
+          provide: getRepositoryToken(Korrigan),
+          useValue: mockKorriganService,
+        },
+        {
           provide: StepService,
           useValue: mockStepService,
         },
@@ -33,6 +48,7 @@ describe('ItineraryService', () => {
 
     service = module.get<ItineraryService>(ItineraryService);
     itineraryRepository = module.get<Repository<Itinerary>>(getRepositoryToken(Itinerary));
+    korriganRepository = module.get<Repository<Korrigan>>(getRepositoryToken(Korrigan));
   });
 
   it('should be defined', () => {
@@ -43,7 +59,7 @@ describe('ItineraryService', () => {
   it('should create an itinerary', async () => {
     const createItineraryDto: CreateItineraryDto = {
       title: 'Test Itinerary',
-      theme: 'Histore',
+      themeId: 1,
       typeOfCache: CacheType.TRADITIONAL,
       difficulty: 1,
       duration: '1 hour',
@@ -57,7 +73,7 @@ describe('ItineraryService', () => {
     expect(result).toBeDefined();
     expect(itineraryRepository.save).toHaveBeenCalledWith(expect.objectContaining({
       title: createItineraryDto.title,
-      theme: createItineraryDto.theme,
+      // themeId: createItineraryDto.themeId,
       typeOfCache: createItineraryDto.typeOfCache,
       difficulty: createItineraryDto.difficulty,
       duration: createItineraryDto.duration,
@@ -69,7 +85,7 @@ describe('ItineraryService', () => {
   it('should handle undefined photoUrl', async () => {
     const createItineraryDto: CreateItineraryDto = {
       title: 'Test Itinerary',
-      theme: 'Histore',
+      themeId: 1,
       typeOfCache: CacheType.TRADITIONAL,
       difficulty: 1,
       duration: '1 hour',
@@ -83,7 +99,7 @@ describe('ItineraryService', () => {
     expect(result).toBeDefined();
     expect(itineraryRepository.save).toHaveBeenCalledWith(expect.objectContaining({
       title: createItineraryDto.title,
-      theme: createItineraryDto.theme,
+      // theme: createItineraryDto.theme,
       typeOfCache: createItineraryDto.typeOfCache,
       difficulty: createItineraryDto.difficulty,
       duration: createItineraryDto.duration,

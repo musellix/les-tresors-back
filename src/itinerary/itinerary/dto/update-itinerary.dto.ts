@@ -15,9 +15,9 @@ export class UpdateItineraryDto {
     @IsString()
     title: string;
 
-    @ApiProperty({ description: "The theme of the itinerary", example: "Sport" })
-    @IsString()
-    theme: string;
+    @ApiProperty({ description: "The theme of the itinerary", example: 1 })
+    @IsInt()
+    themeId: number;
   
     @ApiProperty({ description: "Type of cache used", enum: CacheType, example: "Multicache" })
     @IsEnum(CacheType)

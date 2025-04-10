@@ -3,6 +3,7 @@ import { ItineraryController } from './itinerary.controller';
 import { ItineraryService } from './itinerary.service';
 import { CreateItineraryDto } from './dto/create-itinerary.dto';
 import { CacheType, Itinerary } from './itinerary.entity';
+import { Korrigan } from 'src/korrigan/korrigan.entity';
 
 describe('ItineraryController', () => {
   let controller: ItineraryController;
@@ -11,10 +12,16 @@ describe('ItineraryController', () => {
   beforeEach(async () => {
     fakeItineraryService = {
       createItinerary: (dto: CreateItineraryDto) => {
+        const theme: Korrigan = {
+          id: dto.themeId,
+          name: 'Queen Aman',
+          theme: 'histoire',
+        };
+
         return Promise.resolve({
           id: 1,
           title: dto.title,
-          theme: dto.theme,
+          theme: theme,
           typeOfCache: dto.typeOfCache,
           difficulty: dto.difficulty,
           duration: dto.duration,
@@ -46,7 +53,7 @@ describe('ItineraryController', () => {
   it('should create an itinerary', async () => {
     const createItineraryDto: CreateItineraryDto = {
       title: 'test title',
-      theme: '',
+      themeId: 1,
       typeOfCache: CacheType.TRADITIONAL,
       difficulty: 1,
       duration: '1 hour',

@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { StepService } from '../step/step.service';
 import { UpdateItineraryDto } from './dto/update-itinerary.dto';
+import { Korrigan } from 'src/korrigan/korrigan.entity';
 
 @Injectable()
 export class ItineraryService {
@@ -12,6 +13,8 @@ export class ItineraryService {
     constructor(
         @InjectRepository(Itinerary)
         private itineraryRepository: Repository<Itinerary>,
+        @InjectRepository(Korrigan)
+        private korriganRepository: Repository<Korrigan>,
         private readonly stepService: StepService,
     ) {}
 
@@ -22,9 +25,14 @@ export class ItineraryService {
      * @throws Error if any step creation fails.
      */
     async createItinerary(createItineraryDto: CreateItineraryDto): Promise<Itinerary> {
+        const korrigan = await this.korriganRepository.findOne({ where: { id: createItineraryDto.themeId } });
+        if (!korrigan) {
+          throw new Error('Korrigan not found');
+        }
+
         const itinerary = new Itinerary();
         itinerary.title = createItineraryDto.title;
-        itinerary.theme = createItineraryDto.theme; 
+        itinerary.theme = korrigan; 
         itinerary.typeOfCache = createItineraryDto.typeOfCache;
         itinerary.difficulty = createItineraryDto.difficulty;
         itinerary.duration = createItineraryDto.duration;
@@ -52,8 +60,14 @@ export class ItineraryService {
         if (!itinerary) {
             throw new Error('Itinerary not found');
         }
+
+        const korrigan = await this.korriganRepository.findOne({ where: { id: updateItineraryDto.themeId } });
+        if (!korrigan) {
+          throw new Error('Korrigan not found');
+        }
+
         itinerary.title = updateItineraryDto.title;
-        itinerary.theme = updateItineraryDto.theme; 
+        itinerary.theme = korrigan; 
         itinerary.typeOfCache = updateItineraryDto.typeOfCache;
         itinerary.difficulty = updateItineraryDto.difficulty;
         itinerary.duration = updateItineraryDto.duration;
