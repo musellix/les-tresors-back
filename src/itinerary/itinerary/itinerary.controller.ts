@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
 import { Itinerary } from './itinerary.entity';
 import { CreateItineraryDto } from './dto/create-itinerary.dto';
 import { ItineraryService } from './itinerary.service';
@@ -18,6 +18,13 @@ export class ItineraryController {
         return this.itineraryService.getAllItineraries();
     }
 
+    @Get(':id')
+    @ApiOperation({ summary: 'Get an itinerary' })
+    @ApiResponse({ status: 200, description: 'itinerary detail', type: Itinerary })
+    @ApiResponse({ status: 404, description: 'No itineraries found' })
+    async getItinerary(@Param('id', ParseIntPipe) id: number): Promise<Itinerary> {
+        return this.itineraryService.getItinerary(id);
+    }
 
     @Post('/create')
     @ApiOperation({ summary: 'Create an itinerary' })
@@ -36,4 +43,5 @@ export class ItineraryController {
     async updateItinerary(@Body() body: UpdateItineraryDto): Promise<Itinerary> {
       return this.itineraryService.updateItinerary(body);
     }
+
 }

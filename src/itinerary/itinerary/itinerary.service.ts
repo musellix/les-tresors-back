@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateItineraryDto } from './dto/create-itinerary.dto';
 import { Itinerary } from './itinerary.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -28,6 +28,36 @@ export class ItineraryService {
             throw new Error('No itineraries found');
         }
         return itineraries;
+    }
+
+    /**
+     * Retrieves a specific itinerary by its ID.
+     * @param id - The unique identifier of the itinerary to retrieve. This parameter must be a positive integer.
+     * @returns A promise that resolves to an Itinerary object if the itinerary is found.
+     * @throws {NotFoundException} If no itinerary is found with the provided ID.
+     */
+    async getItinerary(id: number): Promise<Itinerary> {
+        const itinerary = await this.itineraryRepository.findOne({
+            where: { id },
+            relations: {
+                theme: true, 
+                steps: {
+                    dialogues: true
+                }
+            },
+            order: {
+                steps: {
+                    orderId: 'ASC',
+                    dialogues: {
+                        orderId: 'ASC',
+                    },
+                },
+            },
+        });      
+        if (!itinerary) {
+            throw new NotFoundException(`Itinerary with ID ${id} not found`);
+        }      
+        return itinerary;
     }
 
     /**
@@ -94,4 +124,7 @@ export class ItineraryService {
 
         return this.itineraryRepository.save(itinerary);
     }
+
+
+
 }

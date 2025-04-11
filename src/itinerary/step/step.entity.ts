@@ -14,14 +14,14 @@ export class Step {
   itinerary: Itinerary;
 
   @Column()
+  @ApiProperty({ description: 'The order of the step in the itinerary', example: 1 })
+  orderId: number;
+
+  @Column()
   @ApiProperty({ description: 'The title of the step', example: 'Step 1: Starting Point' })
   title: string;
 
   @OneToMany(() => Dialogue, (dialogue) => dialogue.step)
   @ApiProperty({ description: 'Dialogues associated with this step', type: () => [Dialogue] })
   dialogues: Dialogue[];
-
-  @Column()
-  @ApiProperty({ description: 'The order of the step in the itinerary', example: 1 })
-  orderId: number;
 }
