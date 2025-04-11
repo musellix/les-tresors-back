@@ -34,7 +34,7 @@ export class DialogueService {
 
     const korrigan = await this.korriganRepository.findOne({ where: { id: korriganId } });
     if (!korrigan) {
-      throw new Error('Korrigan not found');
+      throw new Error(`Korrigan not found - ${korriganId}`);
     }
 
     const dialogue = new Dialogue();

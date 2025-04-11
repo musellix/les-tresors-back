@@ -19,6 +19,18 @@ export class ItineraryService {
     ) {}
 
     /**
+     * Retrieves all itineraries from the database.
+     * @returns An array of itineraries.
+     */
+    async getAllItineraries(): Promise<Itinerary[]> {
+        const itineraries = await this.itineraryRepository.find({ relations: ['theme'] });
+        if (!itineraries || itineraries.length === 0) {
+            throw new Error('No itineraries found');
+        }
+        return itineraries;
+    }
+
+    /**
      * Creates a new itinerary and its associated steps.
      * @param createItineraryDto - The data transfer object containing itinerary details and steps.
      * @returns The created itinerary.

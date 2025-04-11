@@ -10,6 +10,15 @@ import { UpdateItineraryDto } from './dto/update-itinerary.dto';
 export class ItineraryController {
     constructor(private readonly itineraryService: ItineraryService) {}
 
+    @Get('')
+    @ApiOperation({ summary: 'Get all itineraries' })
+    @ApiResponse({ status: 200, description: 'List of itineraries', type: [Itinerary] })
+    @ApiResponse({ status: 404, description: 'No itineraries found' })
+    async getAllItineraries(): Promise<Itinerary[]> {
+        return this.itineraryService.getAllItineraries();
+    }
+
+
     @Post('/create')
     @ApiOperation({ summary: 'Create an itinerary' })
     @ApiBody({ type: CreateItineraryDto })

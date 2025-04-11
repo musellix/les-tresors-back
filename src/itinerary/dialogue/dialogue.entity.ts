@@ -13,6 +13,10 @@ export class Dialogue {
   @ApiProperty({ description: 'The step associated with this dialogue', type: () => Step })
   step: Step;
 
+  @Column()
+  @ApiProperty({ description: 'The order of the dialogue in the step', example: 1 })
+  orderId: number;
+  
   @ManyToOne(() => Korrigan)
   @ApiProperty({ description: 'The korrigan associated with this dialogue', type: () => Korrigan })
   korrigan: Korrigan;
@@ -21,7 +25,4 @@ export class Dialogue {
   @ApiProperty({ description: 'The text of the dialogue', example: 'Hello, welcome to the adventure!' })
   replica: string;
 
-  @Column()
-  @ApiProperty({ description: 'The order of the dialogue in the step', example: 1 })
-  orderId: number;
 }
