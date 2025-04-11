@@ -11,6 +11,5 @@ export class CreateKorriganDto {
  
     @ApiProperty({ description: "the theme of the korrigan", example: "Histoire"}) 
     @IsStringOrNull()
-    @IsString()
     theme: string;
 }
