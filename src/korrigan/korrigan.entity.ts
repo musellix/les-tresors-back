@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsStringOrEmpty } from 'src/common/validators/is-string-or-empty.validator';
+import { IsStringOrNull } from 'src/common/validators/is-string-or-null.validator';
 
 @Entity()
 export class Korrigan {
@@ -13,9 +13,9 @@ export class Korrigan {
   @ApiProperty({ description: 'The name of the korrigan', example: 'Queen Aman' })
   name: string;
 
-  @Column({ unique: true })
+  @Column({ unique: true, nullable: true })
   @ApiProperty({ description: 'The theme of the korrigan', example: 'histoire' })
-  @IsStringOrEmpty()
+  @IsStringOrNull()
   theme: string;
 
 }

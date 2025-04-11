@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsString, IsUrl } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsStringOrEmpty } from "src/common/validators/is-string-or-empty.validator";
+import { IsStringOrNull } from "src/common/validators/is-string-or-null.validator";
 
 export class CreateKorriganDto {
 
@@ -9,8 +9,8 @@ export class CreateKorriganDto {
     @IsString()
     name: string;
  
-    @ApiProperty({ description: "the theme of the korrigan",example: "Histoire"}) 
-    @IsStringOrEmpty()
+    @ApiProperty({ description: "the theme of the korrigan", example: "Histoire"}) 
+    @IsStringOrNull()
     @IsString()
     theme: string;
 }
