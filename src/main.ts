@@ -23,6 +23,18 @@ async function bootstrap() {
     transform: true, // Transforme les données en instances des DTO
   }));
 
+  // Enable Cors
+  app.enableCors({
+    origin: (origin, callback) => {
+      const allowedOrigins = ['http://localhost:8081', 'https://ton-front-prod.fr'];
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+  });
+
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();
