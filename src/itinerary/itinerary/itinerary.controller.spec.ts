@@ -21,6 +21,8 @@ describe('ItineraryController', () => {
         return Promise.resolve({
           id: 1,
           title: dto.title,
+          startCity: dto.startCity,
+          startLocation: dto.startLocation,
           theme: theme,
           typeOfCache: dto.typeOfCache,
           difficulty: dto.difficulty,
@@ -53,6 +55,8 @@ describe('ItineraryController', () => {
   it('should create an itinerary', async () => {
     const createItineraryDto: CreateItineraryDto = {
       title: 'test title',
+      startCity: 'test city',
+      startLocation: { latitude: 48.8566, longitude: 2.3522 },
       themeId: 1,
       typeOfCache: CacheType.TRADITIONAL,
       difficulty: 1,

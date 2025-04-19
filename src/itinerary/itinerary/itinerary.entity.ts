@@ -2,6 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne } from 'ty
 import { Step } from '../step/step.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { Korrigan } from 'src/korrigan/korrigan.entity';
+import { LocationDto } from 'src/common/dto/location.dto';
 
 export enum CacheType {
   MULTICACHE = 'Multicache',
@@ -17,6 +18,14 @@ export class Itinerary {
   @Column({ unique: true })
   @ApiProperty({ description: 'The title of the itinerary', example: 'A bicyclette avec Louison' })
   title: string;
+
+  @Column()
+  @ApiProperty({ description: "The starting city of the itinerary", example: "Erce-près-Liffré" })
+  startCity: string;
+  
+  @Column({ type: 'json' })
+  @ApiProperty({ description: "The starting location of the itinerary", example: { latitude: 48.8566, longitude: 2.3522 } })
+  startLocation: { latitude: number; longitude: number };
 
   @ManyToOne(() => Korrigan)
   @ApiProperty({ description: 'The theme of the itinerary', type: () => Korrigan })

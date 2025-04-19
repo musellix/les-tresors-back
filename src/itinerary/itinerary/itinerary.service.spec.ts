@@ -59,6 +59,8 @@ describe('ItineraryService', () => {
   it('should create an itinerary', async () => {
     const createItineraryDto: CreateItineraryDto = {
       title: 'Test Itinerary',
+      startCity: 'Test City',
+      startLocation: { latitude: 48.8566, longitude: 2.3522 },
       themeId: 1,
       typeOfCache: CacheType.TRADITIONAL,
       difficulty: 1,
@@ -85,6 +87,8 @@ describe('ItineraryService', () => {
   it('should handle undefined photoUrl', async () => {
     const createItineraryDto: CreateItineraryDto = {
       title: 'Test Itinerary',
+      startCity: 'Test City',
+      startLocation: { latitude: 48.8566, longitude: 2.3522 },
       themeId: 1,
       typeOfCache: CacheType.TRADITIONAL,
       difficulty: 1,

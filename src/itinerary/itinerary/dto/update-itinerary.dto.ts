@@ -3,6 +3,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { CacheType } from "../itinerary.entity";
 import { Type } from "class-transformer";
 import { UpdateStepDto } from "src/itinerary/step/dto/update-step.dto";
+import { LocationDto } from "src/common/dto/location.dto";
 
 export class UpdateItineraryDto {
     @ApiProperty({ description: "The ID of the itinerary to update", example: 1 })
@@ -14,6 +15,17 @@ export class UpdateItineraryDto {
     @IsNotEmpty()
     @IsString()
     title: string;
+
+    @ApiProperty({ description: "The starting city of the itinerary", example: "Erce-près-Liffré" })
+    @IsNotEmpty()
+    @IsString()
+    startCity: string;
+
+    @ApiProperty({ description: "The starting location of the itinerary", example: { latitude: 48.8566, longitude: 2.3522 } })
+    @IsNotEmpty()
+    @ValidateNested()
+    @Type(() => LocationDto)
+    startLocation: LocationDto;
 
     @ApiProperty({ description: "The theme of the itinerary", example: 1 })
     @IsInt()

@@ -74,6 +74,8 @@ export class ItineraryService {
 
         const itinerary = new Itinerary();
         itinerary.title = createItineraryDto.title;
+        itinerary.startCity = createItineraryDto.startCity;
+        itinerary.startLocation = createItineraryDto.startLocation;
         itinerary.theme = korrigan; 
         itinerary.typeOfCache = createItineraryDto.typeOfCache;
         itinerary.difficulty = createItineraryDto.difficulty;
@@ -109,6 +111,8 @@ export class ItineraryService {
         }
 
         itinerary.title = updateItineraryDto.title;
+        itinerary.startCity = updateItineraryDto.startCity;
+        itinerary.startLocation = updateItineraryDto.startLocation;
         itinerary.theme = korrigan; 
         itinerary.typeOfCache = updateItineraryDto.typeOfCache;
         itinerary.difficulty = updateItineraryDto.difficulty;
