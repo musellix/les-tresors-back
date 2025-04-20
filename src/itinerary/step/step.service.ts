@@ -26,7 +26,7 @@ export class StepService {
      * @throws Error if the associated itinerary is not found.
      */
     async createStep(createStepDto: CreateStepDto, itineraryId: number): Promise<Step> {
-        const { title, orderId, dialogues = [] } = createStepDto;
+        const { title, orderId, dialogues = [], location } = createStepDto;
 
         const itinerary = await this.itineraryRepository.findOne({ where: { id: itineraryId } });
         if (!itinerary) {
@@ -37,6 +37,7 @@ export class StepService {
         step.title = title;
         step.orderId = orderId;
         step.itinerary = itinerary;
+        step.location = location;
         const savedStep = await this.stepRepository.save(step);
     
         // save dialogues
@@ -55,7 +56,7 @@ export class StepService {
      * @throws Error if the step or associated itinerary is not found.
      */
     async updateStep(updateStepDto: UpdateStepDto): Promise<Step> {
-        const { id, orderId, title, itineraryId, dialogues = [] } = updateStepDto;
+        const { id, orderId, title, itineraryId, dialogues = [], location } = updateStepDto;
     
         const step = await this.stepRepository.findOne({ where: { id } });
         if (!step) {
@@ -69,6 +70,7 @@ export class StepService {
     
         step.title = title;
         step.orderId = orderId;
+        step.location = location;
         step.itinerary = itinerary;
     
         // update dialogues

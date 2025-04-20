@@ -59,6 +59,7 @@ describe('StepService', () => {
       const createStepDto: CreateStepDto = {
         title: 'Test Step',
         orderId: 1,
+        location: { latitude: 48.8566, longitude: 2.3522 },
         dialogues: [
           { orderId: 1, korriganId: 0, replica: 'Dialogue 1' },
           { orderId: 2, korriganId: 1, replica: 'Dialogue 2' },
@@ -96,6 +97,7 @@ describe('StepService', () => {
       const createStepDto: CreateStepDto = {
         title: 'Test Step',
         orderId: 1,
+        location: null,
         dialogues: [],
       };
 
