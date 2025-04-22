@@ -22,13 +22,14 @@ export class Dialogue {
   @Column()
   @ApiProperty({ description: 'The order of the dialogue in the step', example: 1 })
   orderId: number;
-  
+
   @Column({ type: 'text' })
   @ApiProperty({ description: 'The type of the dialogue', enum: DialogueType, example: DialogueType.INFORMATION })
   dialogueType: DialogueType;
   
+  @ManyToOne(() => Korrigan, { nullable: true })
   @ApiProperty({ description: 'The korrigan associated with this dialogue', type: () => Korrigan })
-  korrigan: Korrigan;
+  korrigan: Korrigan | null = null;
 
   @Column()
   @ApiProperty({ description: 'The text of the dialogue', example: 'Hello, welcome to the adventure!' })

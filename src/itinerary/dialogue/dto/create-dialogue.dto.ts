@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsNumber, IsEnum } from 'class-validator';
+import { IsString, IsNotEmpty, IsNumber, IsEnum, IsOptional } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { DialogueType } from '../dialogue.entity';
 
@@ -13,10 +13,10 @@ export class CreateDialogueDto {
   @IsNotEmpty()
   dialogueType: DialogueType;
 
-  @ApiProperty({ description: 'The ID of the korrigan speaking', example: 1 })
+  @ApiProperty({ description: 'The ID of the korrigan speaking (optional)', example: 1, nullable: true, required: false })
   @IsNumber()
-  @IsNotEmpty()
-  korriganId: number;
+  @IsOptional()
+  korriganId: number | null;
 
   @ApiProperty({ description: 'The text of the dialogue', example: 'Salut les amis !' })
   @IsString()

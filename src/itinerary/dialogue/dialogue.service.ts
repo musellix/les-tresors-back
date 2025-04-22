@@ -32,9 +32,9 @@ export class DialogueService {
       throw new Error('Step not found');
     }
 
-    const korrigan = await this.korriganRepository.findOne({ where: { id: korriganId } });
-    if (!korrigan) {
-      throw new Error(`Korrigan not found - ${korriganId}`);
+    let korrigan: Korrigan | null = null
+    if( korriganId ) {
+      korrigan = await this.korriganRepository.findOne({ where: { id: korriganId } });
     }
 
     const dialogue = new Dialogue();
