@@ -24,9 +24,6 @@ export class ItineraryService {
      */
     async getAllItineraries(): Promise<Itinerary[]> {
         const itineraries = await this.itineraryRepository.find({ relations: ['theme'] });
-        if (!itineraries || itineraries.length === 0) {
-            throw new Error('No itineraries found');
-        }
         return itineraries;
     }
 
