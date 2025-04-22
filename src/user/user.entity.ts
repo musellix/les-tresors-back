@@ -19,7 +19,7 @@ export class User {
   @ApiProperty({ description: 'The hashed password of the user', example: '$2b$10$hashedpassword' })
   password: string;  // TODO stockez un hash du mot de passe
 
-  @CreateDateColumn({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
+  @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   @ApiProperty({ description: 'The date when the user was created', example: '2025-04-06T12:34:56Z' })
   createdAt: Date;
 }

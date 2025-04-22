@@ -7,8 +7,11 @@ const envFile = process.env.NODE_ENV === 'test' ? '.env.test' : '.env.developmen
 dotenv.config({ path: path.resolve(process.cwd(), envFile) });
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
-  type: 'sqlite',
-  database: process.env.DB_NAME,
-  entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-  synchronize: true,  // Ne pas utiliser en production
+  type: 'postgres',
+  url: process.env.DATABASE_URL,
+  autoLoadEntities: true,
+  synchronize: true, // 🔥 à mettre false en prod
+  ssl: {
+    rejectUnauthorized: false,
+  },
 };
