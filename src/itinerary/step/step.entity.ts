@@ -21,7 +21,7 @@ export class Step {
   @ApiProperty({ description: 'The title of the step', example: 'Step 1: Starting Point' })
   title: string;
 
-  @Column({ type: 'json' })
+  @Column({ type: 'json', nullable: true })
   @ApiProperty({ description: "The location of the step", example: { latitude: 48.8566, longitude: 2.3522 } })
   location: { latitude: number; longitude: number } | null;
 
